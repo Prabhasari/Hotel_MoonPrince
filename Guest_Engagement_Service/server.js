@@ -4,10 +4,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import helmet from 'helmet';
 
 import connectDB from './config/db.js';
-import userRoute from './routers/userRouters.js';
 
 dotenv.config()
 
@@ -18,8 +16,6 @@ const app = express();
 const corsOptions = {
     origin: 'http://localhost:5173', // Allow your frontend domain
     credentials: true, // Allow credentials (cookies)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 //middelware
@@ -28,10 +24,6 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 // app.use(cors());
 app.use(cors(corsOptions));
-app.use(helmet({crossOriginResourcePolicy: { policy: "cross-origin" }}));
-app.use("/user_photos", express.static("user_photos"));
-
-app.use("/api/v1/user", userRoute);
 
 app.get("/", (req, res) => {
     res.send({
