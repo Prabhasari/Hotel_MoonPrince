@@ -83,7 +83,7 @@ const Signin = () => {
                     Experience Royal Comfort and unparalleled luxury in every stay.
                   </p>
                 </div>
-                <div className='absolute bottom-0 left-0 right-0 p-4'>
+                <div className='absolute tracking-widest bottom-0 left-0 right-0 p-4'>
                   <p>© 2026 Hotel MoonPrince. All rights reserved.</p>
                 </div>
             </div>
