@@ -6,6 +6,9 @@ import morgan from "morgan";
 
 import connectDB from "./config/db.js";
 
+import roomTypeRoutes from "./routes/roomTypeRoutes.js";
+import roomRoutes from "./routes/roomRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -16,6 +19,9 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+app.use("/api/room-types", roomTypeRoutes);
+app.use("/api/rooms", roomRoutes);
 
 app.get("/", (req, res) => {
   res.json({
