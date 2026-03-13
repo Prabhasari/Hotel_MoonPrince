@@ -1,25 +1,28 @@
+import mongoose from "mongoose";
 import Room from "../models/Room.js";
 import RoomType from "../models/RoomType.js";
 import Hold from "../models/Hold.js";
 import { computeFinalPricePerNight, calculateNights } from "../utils/pricing.js";
 
-// Controller to check room availabiliy for a given room type and date range
 export const getAvailability = async (req, res, next) => {
   try {
-    const { roomTypeId, checkIn, checkOut, qty } = req.query;
+    const validatedQuery = req.validated?.query || req.query;
+    const { roomTypeId, checkIn, checkOut, qty = 1 } = validatedQuery;
 
     const roomType = await RoomType.findById(roomTypeId);
     if (!roomType) {
       return res.status(404).json({ message: "Room type not found" });
     }
 
+    const roomTypeObjectId = new mongoose.Types.ObjectId(roomTypeId);
+
     const totalRooms = await Room.countDocuments({
-      roomType: roomTypeId,
+      roomType: roomTypeObjectId,
       status: { $in: ["ready", "dirty"] }
     });
 
     const overlapQuery = {
-      roomType: roomTypeId,
+      roomType: roomTypeObjectId,
       checkIn: { $lt: new Date(checkOut) },
       checkOut: { $gt: new Date(checkIn) }
     };
@@ -60,11 +63,12 @@ export const getAvailability = async (req, res, next) => {
     const heldQty = heldAgg[0]?.totalQty || 0;
     const confirmedQty = confirmedAgg[0]?.totalQty || 0;
 
+    const requestedQty = Number(qty);
     const availableCount = Math.max(0, totalRooms - heldQty - confirmedQty);
 
     const nights = calculateNights(checkIn, checkOut);
     const priceInfo = computeFinalPricePerNight(roomType);
-    const estimatedTotal = priceInfo.finalPricePerNight * nights * Number(qty);
+    const estimatedTotal = priceInfo.finalPricePerNight * nights * requestedQty;
 
     res.json({
       roomTypeId,
@@ -73,8 +77,8 @@ export const getAvailability = async (req, res, next) => {
       heldQty,
       confirmedQty,
       availableCount,
-      requestedQty: Number(qty),
-      canFulfill: availableCount >= Number(qty),
+      requestedQty,
+      canFulfill: availableCount >= requestedQty,
       nights,
       basePricePerNight: priceInfo.basePricePerNight,
       discountApplied: priceInfo.discountApplied,

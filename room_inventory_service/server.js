@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import roomTypeRoutes from "./routes/roomTypeRoutes.js";
 import roomRoutes from "./routes/roomRoutes.js";
 import availabilityRoutes from "./routes/availabilityRoutes.js";
+import holdRoutes from "./routes/holdRoutes.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 app.use("/api/room-types", roomTypeRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/availability", availabilityRoutes);
+app.use("/api/holds", holdRoutes);
 
 app.get("/", (req, res) => {
   res.json({
