@@ -6,7 +6,10 @@ import {
   Facebook,
   Instagram,
   Mail,
-  MessageCircle
+  MessageCircle,
+  MapPin,
+  Phone,
+  MailIcon
 } from "lucide-react";
 import { PiWhatsappLogoThin } from "react-icons/pi";
 import Logo from "../../public/Logo.png";
@@ -38,7 +41,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#1A1022] min-w-screen text-slate-900 border-t border-slate-500">
 
-      <div className="max-w-full mx-auto px-10 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
+      <div className="max-w-full mx-auto px-10 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
 
         {/* Left Section */}
         <div className="space-y-4 sm:col-span-2 md:col-span-3 lg:col-span-1">
@@ -46,120 +49,71 @@ const Footer = () => {
             <div className="w-10 h-10 text-white font-bold">
               <img src={Logo} alt="Logo" className="w-full h-full object-cover object-top" />
             </div>
-            <span className="dark:text-white text-slate-900 font-semibold text-lg">
+            <span className="dark:text-white text-slate-900 font-semibold text-lg tracking-widest">
               Hotel MoonPrince
             </span>
           </div>
 
-          <p className="text-sm leading-relaxed dark:text-slate-400 text-slate-500 px-3">
-            Building modern web experiences with precision and passion.
+          <p className="text-sm leading-relaxed text-slate-400 px-3 tracking-widest">
+            Defining hospitality through the lens of royal comfort and serene luxury since 2000. Experience the moonlight difference.
           </p>
         </div>
 
         {/* Sitemap */}
         
         <div className="sm:col-span-1">
-          <h4 className="dark:text-white text-slate-900 font-semibold mb-4 tracking-wide">
+          <h4 className="text-white font-semibold mb-4 tracking-widest">
             SITEMAP
           </h4>
           <ul className="space-y-3 text-sm">
-            <li><Link to="/home" className="dark:hover:text-white hover:text-slate-400 transition">Home</Link></li>
-            <li><Link to="/projects" className="dark:hover:text-white hover:text-slate-400 transition">Projects</Link></li>
-            <li><Link to="/skills" className="dark:hover:text-white hover:text-slate-400 transition">Skills</Link></li>
-            <li><Link to="/profile" className="dark:hover:text-white hover:text-slate-400 transition">Profile</Link></li>
+            <li><Link to="/home" className="text-slate-400! hover:text-white! tracking-widest transition ">Home</Link></li>
+            <li><Link to="/rooms" className="text-slate-400! hover:text-white! tracking-widest transition">Rooms</Link></li>
+            <li><Link to="/announcement" className="text-slate-400! hover:text-white! tracking-widest transition">Announcement</Link></li>
+            <li><Link to="/about" className="text-slate-400! hover:text-white! tracking-widest transition">About</Link></li>
           </ul>
         </div>
 
         {/* Social */}
         <div className="sm:col-span-1">
-          <h4 className="dark:text-white text-slate-900 font-semibold mb-4 tracking-wide">
-            SOCIAL
+          <h4 className="text-white font-semibold mb-4 tracking-widest">
+            HOTEL INFO
           </h4>
-          <ul className="space-y-3 text-sm">
-            <li>
-              <a href="https://github.com/KavinMadusanka" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="www.linkedin.com/in/kavinmadhusankha" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/casey.kavin/" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/kavin_madusanka" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://wa.me/94706846037" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                Whatsapp
-              </a>
-            </li>
-            <li>
-              <a href="mailto:kavinmadusanka20011@gmail.com" target="_blank" rel="noreferrer" className="dark:hover:text-white hover:text-slate-400 transition">
-                Email
-              </a>
-            </li>
+          <ul className="space-y-3 text-sm text-slate-400!">
+            <li><Link to="/home" className="text-slate-400! hover:text-white! tracking-widest transition ">Terms of Service</Link></li>
+            <li><Link to="/rooms" className="text-slate-400! hover:text-white! tracking-widest transition">Privacy Policy</Link></li>
+            <li><Link to="/announcement" className="text-slate-400! hover:text-white! tracking-widest transition">Accessibility</Link></li>
+            <li><Link to="/about" className="text-slate-400! hover:text-white! tracking-widest transition">Cancellation Policy</Link></li>
           </ul>
         </div>
         {/* Newsletter Section */}
-      <div className="sm:col-span-2 md:col-span-3 lg:col-span-2">
-        <div className="dark:bg-gray-900 bg-gray-100 rounded-2xl p-8 md:p-12 shadow-lg flex flex-col items-center  gap-6">
-
-          <div>
-            <h3 className="dark:text-white text-slate-900 text-xl font-semibold mb-2">
-              Stay in the Loop
-            </h3>
-            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md">
-              Get occasional updates on new projects, deep-dives into web tech, and development resources.
-            </p>
+      {/* Contact Section */}
+        <div className="sm:col-span-1">
+          <h4 className="text-white  font-semibold mb-4 tracking-widest">
+            CONTACT US
+          </h4>
+          <div className="flex flex-row text-sm gap-3 mb-4 text-slate-400 tracking-widest">
+            <MapPin size={20} />
+            <p>123 Royal Crescent, Moon valley, Cloud Kingdom 45902</p>
           </div>
-
+          <div className="flex flex-row text-sm gap-3 mb-4 text-slate-400 tracking-widest">
+            <Phone size={20} />
+            <p>+94 11 234 5678</p>
+          </div>
+          <div className="flex flex-row text-sm gap-3 mb-4 text-slate-400 tracking-widest">
+            <MailIcon size={20} />
+            <p>info@hotelmoonprince.com</p>
+          </div>
           
         </div>
-      </div>
       </div>
 
       {/* Bottom Section */}
       <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-center">
 
-          <p className="text-sm dark:text-slate-400 text-slate-500">
-            © 2026 Kavin Madhusankha Nugaduwa Vithana. All rights reserved.
+          <p className="text-center justify-center flex text-sm text-slate-400  tracking-widest">
+            © 2026 Hotel MoonPrince. All rights reserved.
           </p>
-
-          <div className="flex gap-4">
-            <a href="https://github.com/KavinMadusanka" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <Github size={18} />
-            </a>
-            <a href="www.linkedin.com/in/kavinmadhusankha" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <Linkedin size={18} />
-            </a>
-            <a href="https://www.facebook.com/casey.kavin/" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <Facebook size={18} />
-            </a>
-            <a href="https://www.instagram.com/kavin_madusanka" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <Instagram size={18} />
-            </a>
-            {/* WhatsApp */}
-            <a href="https://wa.me/94706846037" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-gray-200 transition">
-              <MessageCircle size={18} />
-            </a>
-            {/* <a href="https://wa.me/94706846037" target="_blank" rel="noreferrer" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <PiWhatsappLogoThin size={22} />
-            </a> */}
-
-            {/* Email */}
-            <a href="mailto:kavinmadusanka20011@email.com" target="_blank" className="p-2 dark:bg-gray-800 bg-white rounded-full dark:hover:bg-gray-700 hover:bg-slate-200 transition">
-              <Mail size={18} />
-            </a>
-          </div>
 
         </div>
       </div>
