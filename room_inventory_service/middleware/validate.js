@@ -10,21 +10,18 @@ const validate = (schema, source = "body") => {
     if (error) {
       return res.status(400).json({
         message: "Validation failed",
-        errors: error.details.map(d => d.message)
+        errors: error.details.map((d) => d.message)
       });
     }
 
-    // Important fix
     if (source === "body") {
       req.body = value;
-    }
-
-    if (source === "params") {
+    } else if (source === "params") {
       req.params = value;
+    } else if (source === "query") {
+      req.validated = req.validated || {};
+      req.validated.query = value;
     }
-
-    // DO NOT overwrite req.query
-    // just leave it as validated
 
     next();
   };
