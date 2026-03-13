@@ -15,6 +15,7 @@ function App() {
     <Toaster position="top-right" reverseOrder={false} />
     <div className='min-h-screen'>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/Signin' element={<Signin />} />
         <Route path='/Signup' element={<Signup />} />
         <Route path='/Home' element={<Home />} />
