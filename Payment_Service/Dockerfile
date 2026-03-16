@@ -4,5 +4,5 @@ COPY ["package.json", "package-lock.json*", "./"]
 # RUN npm install --production
 RUN npm ci --omit=dev
 COPY . .
-EXPOSE 8010
+EXPOSE 8050
 CMD ["npm", "start"]
