@@ -1,4 +1,5 @@
 import Announcement from "../models/Announcement.js";
+import cloudinary from './../config/cloudinary.js';
 
 // Create Announcement
 export const createAnnouncement = async (req, res) => {
@@ -106,6 +107,42 @@ export const updateAnnouncement = async (req, res) => {
                 data: updated
             });
             
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+// Delete Announcement
+export const deleteAnnouncement = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const announcement = await Announcement.findById(id);
+
+        if (!announcement) {
+            return res.status(404).json({
+                success: false,
+                message: "Announcement not found"
+            });
+        }
+
+        // delete image from Cloudinary
+        if (announcement.image) {
+            const publicId = announcement.image.split("/").pop().split(".")[0];
+
+            await cloudinary.uploader.destroy(`announcements/${publicId}`);
+        }
+
+        await Announcement.findByIdAndDelete(id);
+
+        res.json({
+            success: true,
+            message: "Announcement deleted successfully"
+        });
+
     } catch (error) {
         res.status(500).json({
             success: false,

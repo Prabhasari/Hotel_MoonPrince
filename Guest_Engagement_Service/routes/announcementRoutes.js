@@ -3,7 +3,8 @@ import upload from '../middleware/upload.js';
 import { createAnnouncement, 
     getAnnouncement, 
     getAllAnnouncements,
-    updateAnnouncement } from '../controllers/announcementController.js';
+    updateAnnouncement,
+    deleteAnnouncement } from '../controllers/announcementController.js';
 
 const router = express.Router();
 
@@ -17,5 +18,8 @@ router.get("/", getAllAnnouncements);
 
 // Update Announcement
 router.put("/:id", upload.single('image'), updateAnnouncement);
+
+// Delete Announcement
+router.delete("/:id", deleteAnnouncement);
 
 export default router;
