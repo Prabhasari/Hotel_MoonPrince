@@ -7,7 +7,7 @@ const options = {
       title: "Room & Inventory Service API",
       version: "1.0.0",
       description:
-        "API documentation for the Room & Inventory microservice of the Hotel Reservation System"
+        "API documentation for the Room & Inventory microservice of the Hotel MoonPrince application"
     },
     servers: [
       {
