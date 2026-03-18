@@ -7,7 +7,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 import connectDB from './config/db.js';
-import userRoute from './routers/userRouters.js';
 
 dotenv.config()
 
@@ -29,9 +28,8 @@ app.use(cookieParser());
 // app.use(cors());
 app.use(cors(corsOptions));
 app.use(helmet({crossOriginResourcePolicy: { policy: "cross-origin" }}));
-app.use("/user_photos", express.static("user_photos"));
 
-app.use("/api/v1/user", userRoute);
+// app.use("/api/v1/payment", userRoute);
 
 app.get("/", (req, res) => {
     res.send({

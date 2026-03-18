@@ -1,33 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+
 import './App.css'
 
+import Signin from './pages/SigninSignupPages/Signin'
+import Signup from './pages/SigninSignupPages/Signup'
+import Home from './pages/HomePages/Home'
+import ForgetPassword from './pages/SigninSignupPages/ForgetPassword'
+import EmailVerification from './pages/SigninSignupPages/EmailVerification'
+import ResetPassword from './pages/SigninSignupPages/ResetPassword'
+
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Toaster position="top-right" reverseOrder={false} />
+    <div className='min-h-screen'>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/Signin' element={<Signin />} />
+        <Route path='/Signup' element={<Signup />} />
+        <Route path='/Home' element={<Home />} />
+        <Route path='/forget-password' element={<ForgetPassword />} />
+        <Route path='/email-verification' element={<EmailVerification />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+      </Routes>
+    </div>
     </>
   )
 }
