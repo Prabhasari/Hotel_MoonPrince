@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  api_gateway:
+    build: ./Api_Gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - user_service
+      # - room_service
+      # - guest_service
+      - payment_service
+    env_file:
+      - ./Api_Gateway/.env
+
+  user_service:
+    build: ./User_Service
+    ports:
+      - "8000:8000"
+
+  # room_service:
+  #   build: ./room_inventory_service
+  #   ports:
+  #     - "8090:8090"
+
+  # guest_service:
+  #   build: ./Guest_Engagement_Service
+  #   ports:
+  #     - "8081:8081"
+
+  payment_service:
+    build: ./Payment_Service
+    ports:
+      - "8050:8050"
+    depends_on:
+      - user_service
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api_gateway
+      - user_service
+      - payment_service
