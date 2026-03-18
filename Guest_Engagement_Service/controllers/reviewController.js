@@ -120,7 +120,7 @@ export const updateReview = async (req, res) => {
             error: error.message
         });
     }
-}
+};
 
 // Get Reviews by Room ID
 export const getReviewsByRoomId = async (req, res) => {
@@ -142,7 +142,7 @@ export const getReviewsByRoomId = async (req, res) => {
             error: error.message
         });
     }
-}
+};
 
 // Delete Review
 export const deleteReview = async (req, res) => {
@@ -224,4 +224,33 @@ export const pinReview = async (req, res) => {
             error: error.message
         });
     }
-}
+};
+
+// Get Reviews by User
+export const getReviewsByUser = async (req, res) => {
+    try {
+        const userId = "65f1a2b3c4d5e6f789012345";
+
+        // validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({
+                message: "Invalid user ID"
+            });
+        }
+
+        const reviews = await Review.find({ userId })
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: reviews.length,
+            data: reviews
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};

@@ -4,7 +4,8 @@ import { createReview,
     updateReview,
     getReviewsByRoomId,
     deleteReview,
-    pinReview} from '../controllers/reviewController.js';
+    pinReview,
+    getReviewsByUser} from '../controllers/reviewController.js';
 
 const router = express.Router();
 
@@ -13,6 +14,9 @@ router.post("/", createReview);
 
 // Get Reviews by Room ID
 router.get("/room/:roomId", getReviewsByRoomId);
+
+// Get Reviews by User ID
+router.get("/user/:userId", getReviewsByUser);
 
 // Get Single Review
 router.get("/:id", getSingleReview);
@@ -25,5 +29,7 @@ router.put("/pin/:id", pinReview);
 
 // Delete Review
 router.delete("/:id", deleteReview);
+
+
 
 export default router;
