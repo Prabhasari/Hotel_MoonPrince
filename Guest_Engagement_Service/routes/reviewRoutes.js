@@ -2,7 +2,8 @@ import express from 'express';
 import { createReview,
     getSingleReview, 
     updateReview,
-    getReviewsByRoomId} from '../controllers/reviewController.js';
+    getReviewsByRoomId,
+    deleteReview} from '../controllers/reviewController.js';
 
 const router = express.Router();
 
@@ -17,5 +18,8 @@ router.get("/:id", getSingleReview);
 
 // Update Review
 router.put("/:id", updateReview);
+
+// Delete Review
+router.delete("/:id", deleteReview);
 
 export default router;

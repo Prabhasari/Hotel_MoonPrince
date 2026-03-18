@@ -144,3 +144,45 @@ export const getReviewsByRoomId = async (req, res) => {
     }
 }
 
+// Delete Review
+export const deleteReview = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = "65f1a2b3c4d5e6f789012345";
+
+        const review = await Review.findById(id);
+
+        if (!review) {
+            return res.status(404).json({
+                message: "Review not found"
+            });
+        }
+
+        if (review.userId.toString() !== userId) {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        }
+
+        const diff = (Date.now() - review.createdAt) / (1000 * 60 * 60);
+
+        if (diff > 24) {
+            return res.status(400).json({
+                message: "You can delete review only within 24 hours"
+            });
+        }
+
+        await Review.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: "Review deleted successfully"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
