@@ -7,7 +7,7 @@ services:
       - "5000:5000"
     depends_on:
       - user_service
-      # - room_service
+      - room_inventory_service
       # - guest_service
       - payment_service
     env_file:
@@ -18,10 +18,12 @@ services:
     ports:
       - "8000:8000"
 
-  # room_service:
-  #   build: ./room_inventory_service
-  #   ports:
-  #     - "8090:8090"
+  room_inventory_service:
+    build: ./room_inventory_service
+    ports:
+      - "8090:8090"
+    depends_on:
+      - user_service
 
   # guest_service:
   #   build: ./Guest_Engagement_Service
@@ -46,3 +48,4 @@ services:
       - api_gateway
       - user_service
       - payment_service
+      - room_inventory_service
