@@ -25,7 +25,6 @@ services:
       - "8090:8090"
     depends_on:
       - user_service
-      - reservation_service
 
   # guest_service:
   #   build: ./Guest_Engagement_Service
