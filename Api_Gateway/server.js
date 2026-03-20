@@ -4,7 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/userRoute.js";
-// import roomRoutes from "./routes/roomRoute.js";
+import roomInventoryRoutes from "./routes/roomInventoryRoute.js";
 // import guestRoutes from "./routes/guestRoute.js";
 import paymentRoutes from "./routes/paymentRoute.js";
 
@@ -17,11 +17,12 @@ app.use(cors({
   credentials: true,
 }));
 
+app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
 app.use("/api/v1/userService", userRoutes);
-// app.use("/api/v1/room", roomRoutes);
+app.use("/api/v1/roomInventoryService", roomInventoryRoutes);
 // app.use("/api/v1/guest", guestRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 
