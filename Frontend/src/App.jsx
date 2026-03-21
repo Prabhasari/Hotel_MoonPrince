@@ -23,6 +23,8 @@ import ManageHoldsPage from "./pages/RoomInventory/admin/ManageHoldsPage";
 import AvailabilityPage from "./pages/RoomInventory/receptionist/AvailabilityPage";
 import BillingPage from './pages/PaymentPages/ReceptionistPages/BillingPage';
 import PaymentPage from './pages/PaymentPages/GuestPages/PaymentPage';
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminRoute from "./routes/AdminRoute";
 
 function App() {
 
@@ -39,15 +41,18 @@ function App() {
           <Route path='/email-verification' element={<EmailVerification />} />
           <Route path='/reset-password' element={<ResetPassword />} />
 
-          {/* Route path for room inventory */}
-          <Route path="/add-room-types" element={<AddRoomTypesPage />} />
-          <Route path="/manage-room-types" element={<ManageRoomTypes />} />
-          <Route path="/add-room" element={<AddRoomPage />} />
-          <Route path="/manage-rooms" element={<ManageRoomsPage />} />
           <Route path="/guest-rooms" element={<GuestRoomsPage />} />
           <Route path="/guest-rooms/:id" element={<RoomDetailsPage />} />
-          <Route path="/manage-holds" element={<ManageHoldsPage />} />
           <Route path="/availability" element={<AvailabilityPage />} />
+
+          <Route element={<AdminRoute />}>
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/add-room-types" element={<AddRoomTypesPage />} />
+            <Route path="/manage-room-types" element={<ManageRoomTypes />} />
+            <Route path="/add-room" element={<AddRoomPage />} />
+            <Route path="/manage-rooms" element={<ManageRoomsPage />} />
+            <Route path="/manage-holds" element={<ManageHoldsPage />} />
+          </Route>
 
           {/* Route path for guest engagement */}
           {/* guest */}
