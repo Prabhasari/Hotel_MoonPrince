@@ -23,11 +23,11 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use("/api/room-types", roomTypeRoutes);
-app.use("/api/rooms", roomRoutes);
-app.use("/api/availability", availabilityRoutes);
-app.use("/api/holds", holdRoutes);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/room-types", roomTypeRoutes);
+app.use("/rooms", roomRoutes);
+app.use("/availability", availabilityRoutes);
+app.use("/holds", holdRoutes);
 
 app.get("/", (req, res) => {
   res.json({

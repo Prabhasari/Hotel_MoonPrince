@@ -1,25 +1,25 @@
 import axios from "axios";
 
-const ROOM_INVENTORY_SERVICE_URL = import.meta.env.VITE_ROOM_INVENTORY_SERVICE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_VERSION = import.meta.env.VITE_API_VERSION;
 
 export const getRoomTypes = async () => {
   const res = await axios.get(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/room-types`
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/room-types`
   );
   return res;
 };
 
 export const getRoomTypeById = async (id) => {
   const res = await axios.get(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/room-types/${id}`
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/room-types/${id}`
   );
   return res;
 };
 
 export const createRoomType = async (formData) => {
   const res = await axios.post(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/room-types`,
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/room-types`,
     formData,
     {
       headers: {
@@ -32,7 +32,7 @@ export const createRoomType = async (formData) => {
 
 export const updateRoomType = async (id, formData) => {
   const res = await axios.patch(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/room-types/${id}`,
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/room-types/${id}`,
     formData,
     {
       headers: {
@@ -45,21 +45,21 @@ export const updateRoomType = async (id, formData) => {
 
 export const deleteRoomType = async (id) => {
   const res = await axios.delete(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/room-types/${id}`
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/room-types/${id}`
   );
   return res;
 };
 
 export const getRooms = async () => {
   const res = await axios.get(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/rooms`
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/rooms`
   );
   return res;
 };
 
 export const createRoom = async (roomData) => {
   const res = await axios.post(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/rooms`,
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/rooms`,
     roomData
   );
   return res;
@@ -67,7 +67,7 @@ export const createRoom = async (roomData) => {
 
 export const updateRoom = async (id, roomData) => {
   const res = await axios.patch(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/rooms/${id}`,
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/rooms/${id}`,
     roomData
   );
   return res;
@@ -75,7 +75,7 @@ export const updateRoom = async (id, roomData) => {
 
 export const deleteRoom = async (id) => {
   const res = await axios.delete(
-    `${ROOM_INVENTORY_SERVICE_URL}${API_VERSION}/rooms/${id}`
+    `${API_BASE_URL}${API_VERSION}/roomInventoryService/rooms/${id}`
   );
   return res;
 };

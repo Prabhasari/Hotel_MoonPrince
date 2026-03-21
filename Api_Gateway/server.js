@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 
 import userRoutes from "./routes/userRoute.js";
-// import roomRoutes from "./routes/roomRoute.js";
-// import guestRoutes from "./routes/guestRoute.js";
+import roomInventoryRoutes from "./routes/roomInventoryRoute.js";
+import guestRoutes from "./routes/guestRoute.js";
 import paymentRoutes from "./routes/paymentRoute.js";
 import reservationRoutes from "./routes/reservationRoute.js";
 import { verifyToken } from "./middlewares/authMiddleware.js";

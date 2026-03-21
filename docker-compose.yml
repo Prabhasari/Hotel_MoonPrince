@@ -7,9 +7,10 @@ services:
       - "5000:5000"
     depends_on:
       - user_service
-      # - room_service
-      # - guest_service
+      - room_inventory_service
+      - guest_service
       - payment_service
+      - reservation_service
     env_file:
       - ./Api_Gateway/.env
 
@@ -18,15 +19,24 @@ services:
     ports:
       - "8000:8000"
 
-  # room_service:
-  #   build: ./room_inventory_service
-  #   ports:
-  #     - "8090:8090"
+  room_inventory_service:
+    build: ./room_inventory_service
+    ports:
+      - "8090:8090"
+    depends_on:
+      - user_service
 
-  # guest_service:
-  #   build: ./Guest_Engagement_Service
-  #   ports:
-  #     - "8081:8081"
+  guest_service:
+    build: ./Guest_Engagement_Service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user_service
+      - reservation_service
+      - room_inventory_service
+      - payment_service
+    env_file:
+      - ./Guest_Engagement_Service/.env
 
   payment_service:
     build: ./Payment_Service
@@ -34,6 +44,14 @@ services:
       - "8050:8050"
     depends_on:
       - user_service
+
+  reservation_service:
+    build: ./Reservation_Service
+    ports:
+      - "8060:8060"
+    depends_on:
+      - user_service
+      - room_inventory_service
 
   frontend:
     build: ./Frontend
@@ -46,3 +64,5 @@ services:
       - api_gateway
       - user_service
       - payment_service
+      - room_inventory_service
+      - reservation_service
