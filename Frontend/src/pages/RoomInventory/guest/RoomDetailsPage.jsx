@@ -11,6 +11,7 @@ import {
   CalendarDays,
   Hotel
 } from "lucide-react";
+import Layout from "../../../layouts/Layout.jsx";
 
 function RoomDetailsPage() {
   const { id } = useParams();
@@ -127,7 +128,8 @@ function RoomDetailsPage() {
   const discountApplied = availabilityInfo?.discountApplied ?? false;
 
   return (
-    <div className="min-h-screen w-screen bg-[#f7f6fb] px-4 py-6 md:px-6">
+    <Layout>
+    <div className="min-h-screen w-full bg-[#f8f7fc] px-4 pb-6 pt-24 md:px-6 md:pt-20">
       <div className="mx-auto max-w-7xl space-y-6">
         <div className="rounded-[28px] bg-white p-5 shadow-sm md:p-6">
           <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -380,6 +382,7 @@ function RoomDetailsPage() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
 

@@ -56,7 +56,7 @@ const Header = () => {
 
     const navLinks = [
         {href : "/home", lable: "Home"},
-        {href : "/rooms", lable: "Rooms"},
+        {href : "/guest-rooms", lable: "Rooms"},
         {href : "/home#amenities", lable: "Amenities"},
         {href : "/view-bills", lable: "Bills"},
         {href : "/announcements", lable: "Announcements"},

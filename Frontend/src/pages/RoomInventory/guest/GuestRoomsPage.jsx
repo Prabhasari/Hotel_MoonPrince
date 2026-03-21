@@ -3,6 +3,7 @@ import FiltersSidebar from "../../../components/room-inventory/FiltersSidebar";
 import GuestRoomCard from "../../../components/room-inventory/GuestRoomCard";
 import { ChevronDown, CalendarDays, BedDouble } from "lucide-react";
 import { getAvailability, getRoomTypes } from "../../../apiService/roomService";
+import Layout from "../../../layouts/Layout.jsx";
 
 function GuestRoomsPage() {
   const [roomTypes, setRoomTypes] = useState([]);
@@ -127,7 +128,8 @@ function GuestRoomsPage() {
   }, [roomTypes, availabilityMap, filters, sortBy]);
 
   return (
-    <div className="min-h-screen w-screen bg-[#f8f7fc] px-4 py-6 md:px-6">
+    <Layout>
+    <div className="min-h-screen w-full bg-[#f8f7fc] px-4 pb-6 pt-24 md:px-6 md:pt-20">
       <div className="mx-auto max-w-[1520px]">
         <div className="mb-5 rounded-[28px] bg-gradient-to-r from-[#ffffff] via-[#faf7ff] to-[#f5efff] px-6 py-5 shadow-[0_10px_28px_rgba(15,23,42,0.05)] md:px-8 md:py-6">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
@@ -251,6 +253,7 @@ function GuestRoomsPage() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
 
