@@ -5,4 +5,4 @@ RUN npm install --production
 # RUN npm ci --omit=dev
 COPY . .
 EXPOSE 8050
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

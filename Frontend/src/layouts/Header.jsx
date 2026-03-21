@@ -6,8 +6,8 @@ import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { Bell, FileArchive, User, User2 } from 'lucide-react';
 import Logo from '../../public/Logo.png';
-import { getUserDetails, logout } from '../apiService/APIservice.jsx';
 import { useEffect } from 'react';
+import { getUserDetails, logout } from '../apiService/userService';
 
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -58,6 +58,7 @@ const Header = () => {
         {href : "/home", lable: "Home"},
         {href : "/rooms", lable: "Rooms"},
         {href : "/home#amenities", lable: "Amenities"},
+        {href : "/view-bills", lable: "Bills"},
         {href : "/announcements", lable: "Announcements"},
     ]
 
