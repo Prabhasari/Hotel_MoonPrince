@@ -7,6 +7,8 @@ import Signin from './pages/SigninSignupPages/Signin'
 import Signup from './pages/SigninSignupPages/Signup'
 import Home from './pages/HomePages/Home'
 import Announcements from './pages/GuestEngagement/guest/Announcements'
+import AddAnnouncements from './pages/GuestEngagement/admin/AddAnnouncement'
+import AllAnnouncements from './pages/GuestEngagement/admin/AllAnnouncements'
 import ForgetPassword from './pages/SigninSignupPages/ForgetPassword'
 import EmailVerification from './pages/SigninSignupPages/EmailVerification'
 import ResetPassword from './pages/SigninSignupPages/ResetPassword'
@@ -45,7 +47,11 @@ function App() {
           <Route path="/availability" element={<AvailabilityPage />} />
 
           {/* Route path for guest engagement */}
+          {/* guest */}
           <Route path="/announcements" element={<Announcements />} />
+          {/* admin */}
+          <Route path="/add-announcement" element={<AddAnnouncements />} />
+          <Route path="/all-announcements" element={<AllAnnouncements />} />
         </Routes>
       </div>
     </>
