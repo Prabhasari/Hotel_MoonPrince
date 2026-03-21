@@ -1,21 +1,27 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   BedDouble,
   DoorOpen,
   CalendarClock,
-  Hotel,
   PlusCircle,
   List,
   Megaphone,
   Archive,
   Receipt,
-  ClipboardList
+  ClipboardList,
+  LogOut
 } from "lucide-react";
-import Logo from '../../../public/Logo.png';
+import { useAuth } from "../../context/auth";
+import { logout } from "../../apiService/userService";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import Logo from "../../../public/Logo.png";
 
 function AdminSidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
 
   const isRoomTypeOpen =
     location.pathname.includes("room-type") ||
@@ -26,8 +32,12 @@ function AdminSidebar() {
     location.pathname.includes("add-room");
 
   const isAnnouncementsOpen =
-  location.pathname.includes("/announcements") ||
-  location.pathname.includes("add-announcement");
+    location.pathname.includes("/announcements") ||
+    location.pathname.includes("add-announcement");
+
+  const isBillsOpen =
+    location.pathname.includes("/billing") ||
+    location.pathname.includes("/all-bills");
 
   const mainLinkClasses =
     "flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium transition !text-white visited:!text-white";
@@ -35,13 +45,36 @@ function AdminSidebar() {
   const subLinkClasses =
     "ml-11 flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition !text-white visited:!text-white";
 
+  const handleLogout = async () => {
+    try {
+      const res = await logout();
+
+      if (res.data.success) {
+        toast.success(res.data.message || "Logged out successfully");
+      }
+
+      localStorage.removeItem("auth");
+      Cookies.remove("access_token");
+      setAuth({ ...auth, token: "" });
+      navigate("/signin");
+    } catch (error) {
+      localStorage.removeItem("auth");
+      Cookies.remove("access_token");
+      setAuth({ ...auth, token: "" });
+      toast.error(error?.response?.data?.message || "Logout failed");
+      navigate("/signin");
+    }
+  };
+
   return (
     <aside className="min-h-screen rounded-[30px] bg-white p-5 text-purple-800 shadow-[0_10px_30px_rgba(15,23,42,0.15)]">
       <div className="border-b border-white/10 pb-5">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-purple-800">
-            <img src={Logo} alt="Logo" 
-                  className="w-full h-full object-cover object-top"
+            <img
+              src={Logo}
+              alt="Logo"
+              className="w-full h-full object-cover object-top"
             />
           </div>
 
@@ -61,9 +94,7 @@ function AdminSidebar() {
           to="/admin-dashboard"
           className={({ isActive }) =>
             `${mainLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD]"
-                : "hover:bg-white/5"
+              isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
             }`
           }
         >
@@ -74,9 +105,7 @@ function AdminSidebar() {
         <div className="space-y-2">
           <div
             className={`${mainLinkClasses} ${
-              isRoomTypeOpen
-                ? "bg-white/5"
-                : "hover:bg-white/5"
+              isRoomTypeOpen ? "bg-white/5" : "hover:bg-white/5"
             }`}
           >
             <BedDouble size={18} className="text-black" />
@@ -87,9 +116,7 @@ function AdminSidebar() {
             to="/add-room-types"
             className={({ isActive }) =>
               `${subLinkClasses} ${
-                isActive
-                  ? "bg-[#6A0DAD]"
-                  : "hover:bg-white/5"
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
               }`
             }
           >
@@ -101,9 +128,7 @@ function AdminSidebar() {
             to="/manage-room-types"
             className={({ isActive }) =>
               `${subLinkClasses} ${
-                isActive
-                  ? "bg-[#6A0DAD]"
-                  : "hover:bg-white/5"
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
               }`
             }
           >
@@ -115,9 +140,7 @@ function AdminSidebar() {
         <div className="space-y-2">
           <div
             className={`${mainLinkClasses} ${
-              isRoomsOpen
-                ? "bg-white/5"
-                : "hover:bg-white/5"
+              isRoomsOpen ? "bg-white/5" : "hover:bg-white/5"
             }`}
           >
             <DoorOpen size={18} className="text-black" />
@@ -128,9 +151,7 @@ function AdminSidebar() {
             to="/add-room"
             className={({ isActive }) =>
               `${subLinkClasses} ${
-                isActive
-                  ? "bg-[#6A0DAD]"
-                  : "hover:bg-white/5"
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
               }`
             }
           >
@@ -142,9 +163,7 @@ function AdminSidebar() {
             to="/manage-rooms"
             className={({ isActive }) =>
               `${subLinkClasses} ${
-                isActive
-                  ? "bg-[#6A0DAD]"
-                  : "hover:bg-white/5"
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
               }`
             }
           >
@@ -152,24 +171,24 @@ function AdminSidebar() {
             <span className="text-black">Manage Rooms</span>
           </NavLink>
         </div>
-        
+
         <NavLink
           to="/manage-holds"
           className={({ isActive }) =>
-          `${mainLinkClasses} ${isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"}`
+            `${mainLinkClasses} ${
+              isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
+            }`
           }
         >
           <Archive size={18} className="text-black" />
           <span className="text-black">Manage Holds</span>
         </NavLink>
-        
+
         <NavLink
           to="/reservations"
           className={({ isActive }) =>
             `${mainLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD]"
-                : "hover:bg-white/5"
+              isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
             }`
           }
         >
@@ -178,97 +197,85 @@ function AdminSidebar() {
         </NavLink>
 
         <div className="space-y-2">
-        <div
-          className={`${mainLinkClasses} ${
-            isAnnouncementsOpen
-              ? "bg-white/5"
-              : "hover:bg-white/5"
-          }`}
-        >
-          <Megaphone size={18} className="text-black" />
-          <span className="text-black">Announcements</span>
+          <div
+            className={`${mainLinkClasses} ${
+              isAnnouncementsOpen ? "bg-white/5" : "hover:bg-white/5"
+            }`}
+          >
+            <Megaphone size={18} className="text-black" />
+            <span className="text-black">Announcements</span>
+          </div>
+
+          <NavLink
+            to="/add-announcement"
+            className={({ isActive }) =>
+              `${subLinkClasses} ${
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
+              }`
+            }
+          >
+            <PlusCircle size={16} className="text-black" />
+            <span className="text-black">Add Announcement</span>
+          </NavLink>
+
+          <NavLink
+            to="/all-announcements"
+            className={({ isActive }) =>
+              `${subLinkClasses} ${
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
+              }`
+            }
+          >
+            <List size={16} className="text-black" />
+            <span className="text-black">All Announcements</span>
+          </NavLink>
         </div>
 
-        <NavLink
-          to="/add-announcement"
-          className={({ isActive }) =>
-            `${subLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD]"
-                : "hover:bg-white/5"
-            }`
-          }
-        >
-          <PlusCircle size={16} className="text-black" />
-          <span className="text-black">Add Announcement</span>
-        </NavLink>
+        <div className="space-y-2">
+          <div
+            className={`${mainLinkClasses} ${
+              isBillsOpen ? "bg-white/5" : "hover:bg-white/5"
+            }`}
+          >
+            <ClipboardList size={18} className="text-black" />
+            <span className="text-black">Bills</span>
+          </div>
 
-        <NavLink
-          to="/all-announcements"
-          className={({ isActive }) =>
-            `${subLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD]"
-                : "hover:bg-white/5"
-            }`
-          }
-        >
-          <List size={16} className="text-black" />
-          <span className="text-black">All Announcements</span>
-        </NavLink>
-      </div>
+          <NavLink
+            to="/billing"
+            className={({ isActive }) =>
+              `${subLinkClasses} ${
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
+              }`
+            }
+          >
+            <PlusCircle size={16} className="text-black" />
+            <span className="text-black">Add Bills</span>
+          </NavLink>
 
-      <div className="space-y-2">
-        <div
-          className={`${mainLinkClasses} ${
-            isAnnouncementsOpen
-              ? "bg-white/5"
-              : "hover:bg-white/5"
-          }`}
-        >
-          <ClipboardList size={18} className="text-black" />
-          <span className="text-black">Bills</span>
+          <NavLink
+            to="/all-bills"
+            className={({ isActive }) =>
+              `${subLinkClasses} ${
+                isActive ? "bg-[#6A0DAD]" : "hover:bg-white/5"
+              }`
+            }
+          >
+            <Receipt size={16} className="text-black" />
+            <span className="text-black">All Payments</span>
+          </NavLink>
         </div>
-
-        <NavLink
-          to="/billing"
-          className={({ isActive }) =>
-            `${subLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD] text-white"
-                : "hover:bg-white/5"
-            }`
-          }
-        >
-          <PlusCircle size={16} className="text-black" />
-          <span className="text-black">Add Bills</span>
-        </NavLink>
-
-        <NavLink
-          to="/all-bills"
-          className={({ isActive }) =>
-            `${subLinkClasses} ${
-              isActive
-                ? "bg-[#6A0DAD] text-white"
-                : "hover:bg-white/5"
-            }`
-          }
-        >
-          <Receipt size={16} className="text-black" />
-          <span className="text-black">All Payments</span>
-        </NavLink>
-      </div>
       </nav>
 
-      {/* <div className="mt-8 rounded-[24px] bg-purple-50 p-4">
-        <p className="text-xs uppercase tracking-[0.15em] text-[#D4AF37]">
-          Admin Note
-        </p>
-        <p className="mt-2 text-sm leading-6 text-slate-400">
-          Manage room categories, rooms, and reservation operations from one
-          place.
-        </p>
-      </div> */}
+      <div className="mt-8">
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-red-500 px-4 py-3 text-sm font-medium text-white transition hover:bg-red-600"
+        >
+          <LogOut size={18} />
+          Logout
+        </button>
+      </div>
     </aside>
   );
 }
