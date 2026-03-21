@@ -12,7 +12,7 @@ const upload = createDiskUploader({
 
 router.post("/register", upload.single("photo"), register);
 router.post("/login", login);
-router.get("/get-user-details", getUserDetails);
+router.get("/get-user-details", requiredSignIn, getUserDetails);
 router.patch("/update-profile", requiredSignIn, upload.single("photo"), updateUserDetails);
 router.post("/logout", requiredSignIn, logout);
 

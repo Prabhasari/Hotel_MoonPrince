@@ -83,7 +83,9 @@ export const login = async (req, res) => {
         const token = await generateToken({ id: existingUser._id, role: existingUser.role });
 
          res.cookie('access_token',token,{
-            httpOnly: true
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
         }).status(200).json({
             success: true,
             message: "Login successful.",
@@ -100,8 +102,9 @@ export const login = async (req, res) => {
 //get all details'
 export const getUserDetails = async(req, res) => {
     try {
-        // const {id} = req.user;
-        const id = req.headers["user-id"];
+        const id = req.user.id;
+        
+        // const id = req.headers["user-id"];
         const existingUser = await user.findById(id).select("-password");
         if(!existingUser){
             return res.status(400).json({
@@ -125,8 +128,8 @@ export const getUserDetails = async(req, res) => {
 //update user details
 export const updateUserDetails = async(req, res) => {
     try {
-        // const {id} = req.user;
-        const id = req.headers["user-id"];
+        const id = req.user.id;
+        // const id = req.headers["user-id"];
         const {name , contactNumber} = req.body;
         
         const existingUser = await user.findById(id);
@@ -174,8 +177,8 @@ export const updateUserDetails = async(req, res) => {
 //remove your account
 export const deleteAccount = async (req, res) => {
     try {
-        // const {id} = req.user;
-        const id = req.headers["user-id"];
+        const id = req.user.id;
+        // const id = req.headers["user-id"];
         const existingUser = await user.findByIdAndDelete(id);
         if(!existingUser){
             return res.status(404).json({

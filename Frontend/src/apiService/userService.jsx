@@ -33,8 +33,9 @@ export const logout = async() => {
 }
 
 export const getUserDetails = async() => {
-    const res = await axios.get(`${USER_SERVICE_URL}${API_VERSION}/userService/user/get-user-details`, {
-        withCredentials: true,
-    });
+    const res = await axios.get(`${USER_SERVICE_URL}${API_VERSION}/userService/user/get-user-details`,
+        {
+            withCredentials: true,
+        });
     return res;
 }

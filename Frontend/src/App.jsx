@@ -6,6 +6,9 @@ import './App.css'
 import Signin from './pages/SigninSignupPages/Signin'
 import Signup from './pages/SigninSignupPages/Signup'
 import Home from './pages/HomePages/Home'
+import Announcements from './pages/GuestEngagement/guest/Announcements'
+import AddAnnouncements from './pages/GuestEngagement/admin/AddAnnouncement'
+import AllAnnouncements from './pages/GuestEngagement/admin/AllAnnouncements'
 import ForgetPassword from './pages/SigninSignupPages/ForgetPassword'
 import EmailVerification from './pages/SigninSignupPages/EmailVerification'
 import ResetPassword from './pages/SigninSignupPages/ResetPassword'
@@ -15,32 +18,42 @@ import ManageRoomsPage from './pages/RoomInventory/admin/ManageRoomsPage'
 import AddRoomPage from './pages/RoomInventory/admin/AddRoomPage'
 import GuestRoomsPage from './pages/RoomInventory/guest/GuestRoomsPage'
 import RoomDetailsPage from './pages/RoomInventory/guest/RoomDetailsPage'
-
+import ManageHoldsPage from "./pages/RoomInventory/admin/ManageHoldsPage";
+import AvailabilityPage from "./pages/RoomInventory/receptionist/AvailabilityPage";
 
 function App() {
 
   return (
     <>
-    <Toaster position="top-right" reverseOrder={false} />
-    <div className='min-h-screen'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/Signin' element={<Signin />} />
-        <Route path='/Signup' element={<Signup />} />
-        <Route path='/Home' element={<Home />} />
-        <Route path='/forget-password' element={<ForgetPassword />} />
-        <Route path='/email-verification' element={<EmailVerification />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className='min-h-screen'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/Signin' element={<Signin />} />
+          <Route path='/Signup' element={<Signup />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/forget-password' element={<ForgetPassword />} />
+          <Route path='/email-verification' element={<EmailVerification />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
 
-        {/* Route path for room inventory */}
-        <Route path="/add-room-types" element={<AddRoomTypesPage />} />
-        <Route path="/manage-room-types" element={<ManageRoomTypes />} />
-        <Route path="/add-room" element={<AddRoomPage />} />
-        <Route path="/manage-rooms" element={<ManageRoomsPage />} />
-        <Route path="/guest-rooms" element={<GuestRoomsPage />} />
-        <Route path="/guest-rooms/:id" element={<RoomDetailsPage />} />
+          {/* Route path for room inventory */}
+          <Route path="/add-room-types" element={<AddRoomTypesPage />} />
+          <Route path="/manage-room-types" element={<ManageRoomTypes />} />
+          <Route path="/add-room" element={<AddRoomPage />} />
+          <Route path="/manage-rooms" element={<ManageRoomsPage />} />
+          <Route path="/guest-rooms" element={<GuestRoomsPage />} />
+          <Route path="/guest-rooms/:id" element={<RoomDetailsPage />} />
+          <Route path="/manage-holds" element={<ManageHoldsPage />} />
+          <Route path="/availability" element={<AvailabilityPage />} />
+
+          {/* Route path for guest engagement */}
+          {/* guest */}
+          <Route path="/announcements" element={<Announcements />} />
+          {/* admin */}
+          <Route path="/add-announcement" element={<AddAnnouncements />} />
+          <Route path="/all-announcements" element={<AllAnnouncements />} />
         </Routes>
-    </div>
+      </div>
     </>
   )
 }

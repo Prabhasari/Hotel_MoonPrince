@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../../public/Logo.png'
-import { login } from '../../apiService/APIservice';
+import { login } from '../../apiService/userService';
 
 const Signin = () => {
     const navigate = useNavigate();

@@ -69,3 +69,24 @@ export const deleteRoom = async (id) => {
 export const updateRoomStatus = async (id, payload) => {
   return axios.patch(`${ROOM_INVENTORY_BASE}/rooms/${id}/status`, payload);
 };
+
+export const getHolds = async ({ status = "all", search = "" } = {}) => {
+  return axios.get(`${ROOM_INVENTORY_BASE}/holds`, {
+    params: {
+      status,
+      search
+    }
+  });
+};
+
+export const getHoldById = async (id) => {
+  return axios.get(`${ROOM_INVENTORY_BASE}/holds/${id}`);
+};
+
+export const confirmHold = async (holdId) => {
+  return axios.post(`${ROOM_INVENTORY_BASE}/holds/${holdId}/confirm`);
+};
+
+export const releaseHold = async (holdId) => {
+  return axios.post(`${ROOM_INVENTORY_BASE}/holds/${holdId}/release`);
+};
