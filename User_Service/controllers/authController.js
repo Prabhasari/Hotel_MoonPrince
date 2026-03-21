@@ -125,6 +125,32 @@ export const getUserDetails = async(req, res) => {
     }
 }
 
+//get User details by ID (admin use)
+export const getUserDetailsById = async(req, res) => {
+    try {
+        const id = req.params.id;
+        
+        // const id = req.headers["user-id"];
+        const existingUser = await user.findById(id).select("-password");
+        if(!existingUser){
+            return res.status(400).json({
+                success: false,
+                message: "User does not exist."
+            })
+        }
+        res.status(200).json({
+            success: true,
+            message: "User details retrieved successfully.",
+            user: existingUser
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server Side Error"
+        })
+    }
+}
+
 //update user details
 export const updateUserDetails = async(req, res) => {
     try {
