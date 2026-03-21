@@ -135,10 +135,6 @@ function RoomDetailsPage() {
               <h2 className="m-0 text-[20px] font-bold text-[#1f2430] md:text-[28px]">
                 {roomType.name}
               </h2>
-
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-[#6b7280]">
-                {roomType.description || "Comfortable stay with modern facilities."}
-              </p>
             </div>
           </div>
 
