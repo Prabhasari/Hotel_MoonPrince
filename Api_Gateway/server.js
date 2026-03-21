@@ -18,7 +18,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
@@ -27,6 +26,8 @@ app.use("/api/v1/roomInventoryService", roomInventoryRoutes);
 app.use("/api/v1/guestService", guestRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reservations", reservationRoutes);
+
+app.use(express.json());
 
 app.listen(process.env.PORT, () => {
   console.log(`API Gateway running on port ${process.env.PORT}`);
