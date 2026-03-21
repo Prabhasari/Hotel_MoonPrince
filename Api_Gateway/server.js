@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoute.js";
 import roomInventoryRoutes from "./routes/roomInventoryRoute.js";
 import guestRoutes from "./routes/guestRoute.js";
 import paymentRoutes from "./routes/paymentRoute.js";
+import reservationRoutes from "./routes/reservationRoute.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use("/api/v1/userService", userRoutes);
 app.use("/api/v1/roomInventoryService", roomInventoryRoutes);
 app.use("/api/v1/guestService", guestRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/reservations", reservationRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`API Gateway running on port ${process.env.PORT}`);
