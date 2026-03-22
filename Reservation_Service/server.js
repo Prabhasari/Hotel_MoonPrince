@@ -18,15 +18,7 @@ const app = express();
 connectDB();
 
 app.use(helmet());
-
-// Explicit CORS config — never use cors() with no args when credentials are involved
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
