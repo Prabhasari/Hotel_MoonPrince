@@ -20,7 +20,7 @@ const router = express.Router();
 router
   .route("/")
   .post(requiredSignIn, isAdmin, validate(createRoomSchema), createRoom)
-  .get(requiredSignIn, isAdmin, getRooms);
+  .get(requiredSignIn, getRooms);
 
 router
   .route("/:id")
